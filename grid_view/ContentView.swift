@@ -9,8 +9,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    let flowers = Flower.all()
     var body: some View {
-        Text("Hello, World!")
+        
+        let chunkFlowers = flowers.chunk(into: 2)
+       return List{
+        ForEach(0..<chunkFlowers.count){index in
+                HStack{
+                    ForEach(chunkFlowers[index]){ flower in
+                        Image(flower.name)
+                        .resizable()
+                        .scaledToFit()
+                            .padding(.all,20)
+                            .shadow(radius: 5)
+                    }
+                }
+            }
+        }
     }
 }
 
